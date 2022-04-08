@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: calculator
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+#Port settings
+server:
+  port: 9090
+
+
+#Misc
+swagger:
+  base-path: /
