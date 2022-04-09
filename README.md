@@ -17,4 +17,4 @@ Boot (Web)
 
 You can use swagger:
 
-http://localhost:9090/swagger-ui.html
+http://localhost:8080/swagger-ui/
