@@ -1,6 +1,6 @@
 package com.sennikov.calculator.dto;
 
-public class Response<T> implements iResponse{
+public class Response<T> implements iResponse {
 
     private T result;
 

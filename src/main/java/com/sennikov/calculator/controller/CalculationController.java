@@ -5,10 +5,12 @@ import com.sennikov.calculator.dto.iResponse;
 import com.sennikov.calculator.service.CalculationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api("Calculate controller")
@@ -50,11 +52,13 @@ public class CalculationController {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public Response<String> handleIllegalArgumentException(IllegalArgumentException ex) {
         return new Response<>("Error. Division by zero");
     }
 
     @ExceptionHandler(ArithmeticException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public Response<String> handleArithmeticException(ArithmeticException ex) {
         return new Response<>("Error. Too big numbers");
     }
