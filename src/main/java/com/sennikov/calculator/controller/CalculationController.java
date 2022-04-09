@@ -6,13 +6,14 @@ import com.sennikov.calculator.service.CalculationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api("Calculate controller")
-@RestController("api/v1/сalculation")
+@RestController()
+@RequestMapping("api/v1/сalculation")
 public class CalculationController {
 
     public CalculationController(CalculationService calculationService) {
@@ -22,30 +23,30 @@ public class CalculationController {
     private final CalculationService calculationService;
 
     @ApiOperation(value = "Send addition command")
-    @RequestMapping(path = "/addition", method = RequestMethod.GET)
+    @GetMapping(path = "/addition")
     public iResponse addition(@RequestParam("firstNumber") int firstNumber, @RequestParam("secondNumber") int secondNumber) {
         return new Response<>(calculationService.add(firstNumber, secondNumber));
     }
 
     @ApiOperation(value = "Send subtraction command")
-    @RequestMapping(path = "/subtraction", method = RequestMethod.GET)
+    @GetMapping(path = "/subtraction")
     public iResponse minus(@RequestParam("firstNumber") int firstNumber, @RequestParam("secondNumber") int secondNumber) {
         return new Response<>(calculationService.minus(firstNumber, secondNumber));
     }
 
     @ApiOperation(value = "Send multiply command")
-    @RequestMapping(path = "/multiply", method = RequestMethod.GET)
+    @GetMapping(path = "/multiply")
     public iResponse multiply(@RequestParam("firstNumber") int firstNumber, @RequestParam("secondNumber") int secondNumber) {
         return new Response<>(calculationService.multiply(firstNumber, secondNumber));
     }
 
     @ApiOperation(value = "Send divide command")
-    @RequestMapping(path = "/divide", method = RequestMethod.GET)
+    @GetMapping(path = "/divide")
     public iResponse divide(@RequestParam("firstNumber") int firstNumber, @RequestParam("secondNumber") int secondNumber) {
         if (secondNumber == 0) {
             throw new IllegalArgumentException("Division by zero");
         }
-            return new Response<>(calculationService.divide(firstNumber, secondNumber));
+        return new Response<>(calculationService.divide(firstNumber, secondNumber));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
